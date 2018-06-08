@@ -1,0 +1,18 @@
+VERSION ""
+
+NS_ :
+
+BS_:
+
+BU_: RADAR
+
+BO_ 400 TRACK_TARGET_0: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+CM_ BU RADAR "Radar sensor sending target data to car"
+
+
