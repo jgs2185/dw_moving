@@ -6,7 +6,878 @@ BS_:
 
 BU_: RADAR
 
-BO_ 400 TRACK_TARGET_0: 8 RADAR
+BO_ 257 RADAR_ACK: 8 RADAR
+ SG_ DATA : 7:64@0+ (1,0) [0|0] "" AI
+
+BO_ 1086 START_FRAME: 8 RADAR
+ SG_ TARGET_TRACK_COUNT : 7:32@0+ (1,0) [0|32766] "" AI
+
+BO_ 1087 END_FRAME: 8 RADAR
+ SG_ TARGET_TRACK_COUNT : 7:32@0+ (1,0) [0|32766] "" AI
+ SG_ TARGET_COUNT : 39:8@0+ (1,0) [0|62] "" AI
+
+BO_ 1024 TRACK_TARGET_0: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1025 TRACK_TARGET_1: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1026 TRACK_TARGET_2: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1027 TRACK_TARGET_3: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1028 TRACK_TARGET_4: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1029 TRACK_TARGET_5: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1030 TRACK_TARGET_6: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1031 TRACK_TARGET_7: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1032 TRACK_TARGET_8: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1033 TRACK_TARGET_9: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1034 TRACK_TARGET_10: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1035 TRACK_TARGET_11: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1036 TRACK_TARGET_12: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1037 TRACK_TARGET_13: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1038 TRACK_TARGET_14: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1039 TRACK_TARGET_15: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1040 TRACK_TARGET_16: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1041 TRACK_TARGET_17: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1042 TRACK_TARGET_18: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1043 TRACK_TARGET_19: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1044 TRACK_TARGET_20: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1045 TRACK_TARGET_21: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1046 TRACK_TARGET_22: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1047 TRACK_TARGET_23: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1048 TRACK_TARGET_24: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1049 TRACK_TARGET_25: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1050 TRACK_TARGET_26: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1051 TRACK_TARGET_27: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1052 TRACK_TARGET_28: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1053 TRACK_TARGET_29: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1054 TRACK_TARGET_30: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1055 TRACK_TARGET_31: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1056 TRACK_TARGET_32: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1057 TRACK_TARGET_33: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1058 TRACK_TARGET_34: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1059 TRACK_TARGET_35: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1060 TRACK_TARGET_36: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1061 TRACK_TARGET_37: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1062 TRACK_TARGET_38: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1063 TRACK_TARGET_39: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1064 TRACK_TARGET_40: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1065 TRACK_TARGET_41: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1066 TRACK_TARGET_42: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1067 TRACK_TARGET_43: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1068 TRACK_TARGET_44: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1069 TRACK_TARGET_45: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1070 TRACK_TARGET_46: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1071 TRACK_TARGET_47: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1072 TRACK_TARGET_48: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1073 TRACK_TARGET_49: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1074 TRACK_TARGET_50: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1075 TRACK_TARGET_51: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1076 TRACK_TARGET_52: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1077 TRACK_TARGET_53: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1078 TRACK_TARGET_54: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1079 TRACK_TARGET_55: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1080 TRACK_TARGET_56: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1081 TRACK_TARGET_57: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1082 TRACK_TARGET_58: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1083 TRACK_TARGET_59: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1084 TRACK_TARGET_60: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1085 TRACK_TARGET_61: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1280 RAW_TARGET_0: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1281 RAW_TARGET_1: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1282 RAW_TARGET_2: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1283 RAW_TARGET_3: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1284 RAW_TARGET_4: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1285 RAW_TARGET_5: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1286 RAW_TARGET_6: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1287 RAW_TARGET_7: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1288 RAW_TARGET_8: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1289 RAW_TARGET_9: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1290 RAW_TARGET_10: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1291 RAW_TARGET_11: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1292 RAW_TARGET_12: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1293 RAW_TARGET_13: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1294 RAW_TARGET_14: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1295 RAW_TARGET_15: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1296 RAW_TARGET_16: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1297 RAW_TARGET_17: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1298 RAW_TARGET_18: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1299 RAW_TARGET_19: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1300 RAW_TARGET_20: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1301 RAW_TARGET_21: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1302 RAW_TARGET_22: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1303 RAW_TARGET_23: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1304 RAW_TARGET_24: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1305 RAW_TARGET_25: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1306 RAW_TARGET_26: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1307 RAW_TARGET_27: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1308 RAW_TARGET_28: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1309 RAW_TARGET_29: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1310 RAW_TARGET_30: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1311 RAW_TARGET_31: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1312 RAW_TARGET_32: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1313 RAW_TARGET_33: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1314 RAW_TARGET_34: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1315 RAW_TARGET_35: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1316 RAW_TARGET_36: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1317 RAW_TARGET_37: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1318 RAW_TARGET_38: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1319 RAW_TARGET_39: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1320 RAW_TARGET_40: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1321 RAW_TARGET_41: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1322 RAW_TARGET_42: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1323 RAW_TARGET_43: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1324 RAW_TARGET_44: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1325 RAW_TARGET_45: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1326 RAW_TARGET_46: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1327 RAW_TARGET_47: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1328 RAW_TARGET_48: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1329 RAW_TARGET_49: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1330 RAW_TARGET_50: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1331 RAW_TARGET_51: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1332 RAW_TARGET_52: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1333 RAW_TARGET_53: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1334 RAW_TARGET_54: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1335 RAW_TARGET_55: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1336 RAW_TARGET_56: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1337 RAW_TARGET_57: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1338 RAW_TARGET_58: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1339 RAW_TARGET_59: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1340 RAW_TARGET_60: 8 RADAR
+ SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
+ SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
+ SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
+ SG_ VELOCITY : 39:16@0- (0.01,0) [-60|30] "m/s" AI
+ SG_ ANGLE : 55:16@0- (-0.01,0) [-25|25] "degree" AI
+
+BO_ 1341 RAW_TARGET_61: 8 RADAR
  SG_ TARGET_ID : 7:8@0+ (1,0) [0|41] "" AI
  SG_ TARGET_SNR : 15:8@0+ (1,0) [0|0] "dB" AI
  SG_ DISTANCE : 23:16@0- (0.01,0) [1|200] "m" AI
