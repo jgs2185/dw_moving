@@ -89,41 +89,31 @@ void sig_int_handler(int sig)
 //------------------------------------------------------------------------------
 void printAllSignalValues(dwCANInterpreterHandle_t canParser)
 {
-//    std::cout << "printing signals" << std::endl;
     dwStatus status;
     uint32_t num;
     status = dwCANInterpreter_getNumberSignals(&num, canParser);
-//    std::cout<< "status: " << num << std::endl;
+
     if( status==DW_SUCCESS && num > 0)
     {
-//        std::cout << "status good" << std::endl;
         float32_t value = 0;
         dwTime_t timestamp = 0;
         const char *name;
 
         for (uint32_t i = 0; i < num; ++i )
         {
-//            std::cout << "looping over signals" << std::endl;
             if(dwCANInterpreter_getSignalName(&name, i, canParser) == DW_SUCCESS)
             {
-//                std::cout << "got signal name" << std::endl;
                 if (dwCANInterpreter_getf32(&value, &timestamp, i, canParser) == DW_SUCCESS)
                 {
-//                    std::cout << "got value" << std::endl;
                     if(0 == strcmp(name,TARGET_ID.c_str())){
-//                        std::cout << " Target ID " << value << " m/s at [" << timestamp << "]";
                         std::cout << " Target ID " << value << " - " << std::endl;}
                     else if(0 == strcmp(name,TARGET_SNR.c_str())){
-//                        std::cout << " Target SNR " << value << " rad at [" << timestamp << "]";
                         std::cout << " Target SNR " << value << " - " << std::endl;}
                     else if(0 == strcmp(name,DISTANCE.c_str())){
-//                        std::cout << " Target SNR " << value << " rad at [" << timestamp << "]";
                         std::cout << " Target Distance " << value << " m " << std::endl;}
                     else if(0 == strcmp(name,VELOCITY.c_str())){
-//                        std::cout << " Target SNR " << value << " rad at [" << timestamp << "]";
                         std::cout << " Velocity " << value << " m/s " << std::endl;}
                     else if(0 == strcmp(name,ANGLE.c_str())){
-//                        std::cout << " Target SNR " << value << " rad at [" << timestamp << "]";
                         std::cout << " Angle " << value << " degree " << std::endl;}
                     else
                         std::cout << name << ":" << value << (i < num - 1 ? ", " : "") << std::endl;
@@ -148,9 +138,6 @@ dwRadarDetection parseCANtarget(dwCANMessage msg)
         detection.azimuth = (int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
         detection.radialVelocity = (int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
         detection.rcs = msg.data[1];
-        //int id = frame.data[0]; 
-        //detection.radialVelocity = 12;
-
     }
 
     return detection;
@@ -176,27 +163,10 @@ int main(int argc, const char **argv)
 
     ProgramArguments arguments(
         {
-            ProgramArguments::Option_t("driver", "can.virtual"),
-            ProgramArguments::Option_t("params", (std::string("file=") + DataPath::get() +
-                                                  "/samples/sensors/can/canbus_dbc.can").c_str()),
-            ProgramArguments::Option_t("dbc", (DataPath::get() +
-                                                  "/samples/sensors/can/sample.dbc").c_str()),
+            ProgramArguments::Option_t("driver", "can.socket"),
+            ProgramArguments::Option_t("params", "device=can0"),
+            ProgramArguments::Option_t("dbc", (DataPath::get() + "lib/kanza77.dbc").c_str()),
         });
-
-    if (!arguments.parse(argc, argv)) {
-        std::cout << "Usage: " << argv[0] << std::endl;
-        std::cout << "\t--driver=can.virtual \t\t\t: one of the available CAN drivers "
-                  << "(see sample_sensors_info)\n";
-        std::cout << "\t--params=file=canbus_dbc.can\t: comma separated "
-                  << "key=value parameters for the sensor "
-                  << "(see sample_sensor_info for a set of supported parameters)\n";
-        std::cout << "\t--dbc=sample.dbc\t\t: input dbc file. (set to plugin, to run plugin-based interpreter)"
-                  << std::endl;
-
-        return -1;
-    }
-
-    std::cout << "Program Arguments:\n" << arguments.printList() << std::endl;
 
     dwContextHandle_t sdk   = DW_NULL_HANDLE;
     dwSALHandle_t hal       = DW_NULL_HANDLE;
@@ -233,7 +203,7 @@ int main(int argc, const char **argv)
         }
     }
 
-    // if interpreter is provided, create an instance of it
+    // load the dbc for K77
     dwCANInterpreterHandle_t canParser = DW_NULL_HANDLE;
     if (arguments.has("dbc") && arguments.get("dbc") != "plugin"){
         std::cout << "Create DBC-based CAN message interpreter" << std::endl;
@@ -244,41 +214,26 @@ int main(int argc, const char **argv)
         if (result != DW_SUCCESS) {
             std::cout << "Cannot create DBC-based CAN message interpreter" << std::endl;
         }
-
-    // if not create a plugin based one
-    }else
-    {
-        std::cout << "Create Plugin-based CAN message interpreter" << std::endl;
-
-        dwCANInterpreterInterface interpreter;
-
-        interpreter.addMessage = smpl_addMessage;
-        interpreter.getDataf32 = smpl_getDataf32;
-        interpreter.getDatai32 = smpl_getDatai32;
-        interpreter.getNumAvailableSignals = smpl_getNumAvailableSignals;
-        interpreter.getSignalInfo = smpl_getSignalInfo;
-
-        std::cout << "Create simple default CAN message interpreter" << std::endl;
-        dwStatus result = dwCANInterpreter_buildFromCallbacks(&canParser, interpreter, NULL, sdk);
-        if (result != DW_SUCCESS) {
-            std::cout << "Cannot create callback based CAN message interpreter" << std::endl;
-        }
     }
 
-    dwRadarDetection received;
-
     gRun = dwSensor_start(canSensor) == DW_SUCCESS;
-
     bool readyForTargets = false;
 
-    std::vector<dwRadarDetection> vDetections;
+    //this vector will be repopulated on a 'per-scan' basis. 
+    //there currently is no publishing mechanism implemented.  
+    //this should be implemented in the line below
+    // } else if(msg.id == 0x43F ){
+
+    std::vector<dwRadarDetection> detections;
 
     // receive messages
     while (gRun) {
         std::this_thread::yield();
 
         dwCANMessage msg;
+
         dwStatus status = dwSensorCAN_readMessage(&msg, 100000, canSensor);
+
 
         if (status == DW_TIME_OUT)
             continue;
@@ -294,34 +249,29 @@ int main(int argc, const char **argv)
 
         // log message
         std::cout << msg.timestamp_us;
-        if (status != DW_SUCCESS)
-        {
+        if (status != DW_SUCCESS) {
             std::cout << " ERROR " << dwGetStatusName(status);
         } else {
-
-
-            std::cout << " [0x" << std::hex << msg.id << "] -> ";
-            for (auto i = 0; i < msg.size; i++)
-                std::cout << "0x" << std::hex << (int)msg.data[i] << " ";
-            std::cout << std::dec;
-
-            // use parser to get meaningful information from the data
-//            if (canParser)
-//                printAllSignalValues(canParser);
-    
-            if(msg.id == 0x43E ){
+            //This is a header frame for Kanza-77
+            if( msg.id == 0x43E ) {
                 readyForTargets = true;
                 continue;
-            } else if(msg.id == 0x43F ){
+            //This is a footer frame for Kanza-77
+            } else if( (msg.id == 0x43F) && (readyForTargets) ) {
+                //this is where you direct the output of the detections vector.          
                 readyForTargets = false;
                 continue;
-            } else if(readyForTargets){
+            //Everything else is either a target or a radar ACK
+            } else if( readyForTargets ){
+                dwRadarDetection received;
                 received = parseCANtarget(msg);
-                std::cout << "SNR: " << received.rcs << std::endl;
+                std::cout << "SNR: "      << received.rcs << std::endl;
                 std::cout << "distance: " << received.radius << std::endl;
                 std::cout << "velocity: " << received.radialVelocity << std::endl;
-                std::cout << "angle: " << received.azimuth << std::endl;
-                vDetections.push_back(received);
+                std::cout << "angle: "    << received.azimuth << std::endl;
+                
+                //add the radar detection to the detection vector.
+                detections.push_back(received);
             }
         }
         std::cout << std::endl;
