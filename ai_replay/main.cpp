@@ -143,6 +143,11 @@ private:
 
     char *gPointCloudBuffer[DW_RADAR_RETURN_TYPE_COUNT][DW_RADAR_RANGE_COUNT];
 
+    // ---------------------------------------------------
+    // Sample specific. Vector for holding parsed CAN data
+    // ---------------------------------------------------
+    std::vector<dwRadarDetection> detections;
+
     // -------------------------------------------------------
     // Sample specific. Various flags for various display modes
     // -------------------------------------------------------
@@ -157,6 +162,8 @@ private:
     bool gRenderTracks = true;
     bool gRenderClusters = true;
     bool gRenderStatus = true;
+    bool readyForTargets = false;
+    bool renderReady = true;
 
     // -------------------------------------------------------
     // Sample specific. Dynamics
@@ -493,10 +500,16 @@ public:
     ///------------------------------------------------------------------------------
     void onProcess() override
     {
+        //std::cout << "in onProcess" << std::endl;
         // Render here
-        renderFrame();
+        if (renderReady){
+            renderFrame();
+            renderReady = false;
+        }
+        //std::cout << "passed renderFrame" << std::endl;
         // Process stuff
         computeSpin();
+        //std::cout << "passed computeSpin" << std::endl;
     }
 
 protected:
@@ -552,7 +565,7 @@ protected:
         layout.texFormat   = DW_RENDER_FORMAT_NULL;
 
         // Initialize Point Clouds
-        uint32_t maximumPoints = 62; //gRadarProperties.maxReturnsPerScan;
+        uint32_t maximumPoints = 10; //gRadarProperties.maxReturnsPerScan;
         size_t maxPointStride = std::max(sizeof(dwRadarDetection), sizeof(dwRadarDetection));
         maxPointStride = std::max(maxPointStride, sizeof(dwRadarStatus));
 
@@ -880,7 +893,7 @@ protected:
 
     void renderFrame()
     {
-
+        std::cout << "attempting render" << std::endl;
         glDepthFunc(GL_LESS);
 
         glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -917,15 +930,17 @@ protected:
             dwRenderer_renderBuffer(gPointCloudAsLines, renderer);
 
         dwRenderer_setLineWidth(1.0f, renderer);
-
+        std::cout<< "about to render point cloud" << std::endl;
         dwRenderer_setColor(DW_RENDERER_COLOR_RED, renderer);
-        if (gRenderDetections) {
-            for (size_t i = 0; i < DW_RADAR_RANGE_COUNT; i++) {
-                dwRenderer_renderBuffer(
-                    gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][i], renderer);
-            }
-        }
-
+//        if (gRenderDetections) {
+//            for (size_t i = 0; i < DW_RADAR_RANGE_COUNT; i++) {
+//        std::cout << "pointcloud: " << gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2]
+        dwRenderer_renderBuffer(
+                    gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2], renderer);
+//            }
+//        }
+          std::cout << "should have rendered point cloud" << std::endl;
+/*
         dwRenderer_setColor(DW_RENDERER_COLOR_BLUE , renderer);
         if (gRenderTracks) {
             for (size_t i = 0; i < DW_RADAR_RANGE_COUNT; i++) {
@@ -933,7 +948,7 @@ protected:
                     gPointCloud[DW_RADAR_RETURN_TYPE_TRACK][i], renderer);
             }
         }
-
+*/
         // Overlay text
         if (gShowText)
         {
@@ -970,12 +985,102 @@ protected:
         //return gRadarProperties.scansPerSecond * gFreqMultiplier;
     }
 
+//    dwRadarDetection parseCANtarget(dwCANMessage msg)
+    float32_t * parseCANtarget(dwCANMessage msg)
+    {
+        //dwRadarDetection detection;
+        static float32_t decoded[13] = {0};
+
+        if(msg.size > 0){
+/*
+            detection.radius = (int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0; 
+            detection.azimuth = (int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
+            detection.radialVelocity = (int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
+            detection.rcs = msg.data[1];
+*/
+            decoded[7] = (float32_t)(int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0;
+            decoded[6] = (float32_t)(int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
+            decoded[8] = (float32_t)(int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
+            decoded[10] = (float32_t)msg.data[1];
+            decoded[0] = 1;
+            decoded[1] = 2;
+            decoded[2] = 0;
+            decoded[3] = 0;
+            decoded[4] = 0;
+            decoded[5] = 0;
+            decoded[9] = 0;
+            decoded[11] = 0;
+            decoded[12] = 1;
+        }
+
+        return decoded;
+
+    }
+
+    float32_t * collectScan()
+    {
+        static float32_t dataArray[10] = {0};
+        dwCANMessage msg;
+
+        int targetCount = 0;
+        float32_t* received;
+
+        while(!renderReady)
+        {
+            dwSensorCAN_readMessage(&msg, 100000, canSensor);
+            //This is a header frame for Kanza-77
+            if( msg.id == 0x480 ) {//43e
+                readyForTargets = true;
+                std::cout << "header id: " << std::hex << (int)msg.id << std::endl << std::dec;
+            //    continue;
+            //This is a footer frame for Kanza-77
+            } else if( (msg.id == 0x481) && (readyForTargets) ) {//43f
+                //this is where you direct the output of the detections vector.          
+                readyForTargets = false;
+                std::cout << "footer id: " << std::hex << (int)msg.id << std::endl << std::dec;
+                renderReady = true;
+            //    continue;
+            //Everything else is either a target or a radar ACK
+            } else if( readyForTargets ){
+                std::cout << "target id: " << std::hex << (int)msg.id << std::endl << std::dec;
+                received = parseCANtarget(msg);
+                std::cout << "SNR: "      << received[10] << std::endl;
+                std::cout << "distance: " << received[7] << std::endl;
+                std::cout << "velocity: " << received[8] << std::endl;
+                std::cout << "angle: "    << received[6] << std::endl;
+
+                dataArray[targetCount] = *received;
+
+                targetCount ++;
+            }
+        }
+        std::cout << std::endl;
+
+        return dataArray;
+
+    }
+
     void computeSpin()
     {
-//        const  dwRadarScan *nextPacket;
+        float32_t *packetArray;
+
+        packetArray = collectScan();
+
+        std::cout << "passed collectScan" << std::endl;
+
 //        static uint32_t packetCount = 0;
         static std::chrono::system_clock::time_point t_start = std::chrono::high_resolution_clock::now();
         static std::chrono::system_clock::time_point t_end;
+
+        dwTime_t timey;
+        const dwRadarScanType &type{.returnType = DW_RADAR_RETURN_TYPE_DETECTION, .range = DW_RADAR_RANGE_LONG};
+
+/*
+        std::cout << msg.timestamp_us << " " << msg.id << std::endl;
+        if (status != DW_SUCCESS) {
+            std::cout << " ERROR " << dwGetStatusName(status);
+        }
+*/
 /*
         // Allow pausing for recoded replay
         if(gRecordedRadar && gPause)
@@ -994,29 +1099,45 @@ protected:
 */
         // Empty the queue and append all points withing the same spin.
         // Update render structures only when a full spin is done.
-//        dwStatus status = DW_SUCCESS;
+        dwStatus status = DW_SUCCESS;
 
         t_start = std::chrono::high_resolution_clock::now();
 
-//        size_t accumulatedPoints[DW_RADAR_RETURN_TYPE_COUNT][DW_RADAR_RANGE_COUNT]{};
+        size_t accumulatedPoints[DW_RADAR_RETURN_TYPE_COUNT][DW_RADAR_RANGE_COUNT]{};
 
         // ToDo: this is just temporary logic until we return full scans (skadle)
-/*        for (size_t i = 0; i < gRadarProperties.packetsPerScan; i++) {
-            status = dwSensorRadar_readScan(&nextPacket,
-                {}, 100000, gRadarSensor);
+        for (size_t i = 0; i < 10; i++) {
+//            status = dwSensorRadar_readScan(&nextPacket,
+//                {}, 100000, gRadarSensor);
 
+//            float32_t * newArray = &packetArray[i];
+            const dwRadarScan nextPacket = 
+            { 
+                1,
+                timey,
+                timey,
+                type,
+                1,
+                static_cast<void*>(&packetArray[i])
+            };
+
+        std::cout << " made nextPacket " << std::endl;
+            std::cout << "looping through nextPacket, index: " << i << std::endl;
             if (status == DW_SUCCESS) {
-                const dwRadarScanType &type = nextPacket->scanType;
+//                const dwRadarScanType &type = nextPacket->scanType;
+                //type.returnType = DW_RADAR_RETURN_TYPE_DETECTION;
+                //type.range = DW_RADAR_RANGE_LONG;
 
-                switch (type.returnType)
-                {
-                    case DW_RADAR_RETURN_TYPE_DETECTION:
+
+//              switch (type.returnType)
+//                {
+//                    case DW_RADAR_RETURN_TYPE_DETECTION:
                         memcpy(gPointCloudBuffer[type.returnType][type.range] +
                             accumulatedPoints[type.returnType][type.range] * sizeof(dwRadarDetection),
-                            nextPacket->data,
-                            nextPacket->numReturns * sizeof(dwRadarDetection));
-                        break;
-                    case DW_RADAR_RETURN_TYPE_TRACK:
+                            nextPacket.data,
+                            nextPacket.numReturns * sizeof(dwRadarDetection));
+//                        break;
+/*                    case DW_RADAR_RETURN_TYPE_TRACK:
                         memcpy(gPointCloudBuffer[type.returnType][type.range] +
                             accumulatedPoints[type.returnType][type.range] * sizeof(dwRadarTrack),
                             nextPacket->data,
@@ -1029,35 +1150,37 @@ protected:
                         std::cout << "RadarReplay: Invalid point type received"<<std::endl;
                         break;
                 }
+*/
+                accumulatedPoints[type.returnType][type.range] += nextPacket.numReturns;
 
-                accumulatedPoints[type.returnType][type.range] += nextPacket->numReturns;
+//                gMessage1 = "Host timestamp " + toStr(nextPacket->hostTimestamp/1000000ULL) + "(sec) / "
+//                                              + toStr(nextPacket->hostTimestamp) + "(millisecs)";
+//                gMessage2 = "Sensor timestamp " + toStr(nextPacket->sensorTimestamp/1000000ULL) + "(sec) / "
+//                                              + toStr(nextPacket->sensorTimestamp) + "(millisecs)";
 
-                gMessage1 = "Host timestamp " + toStr(nextPacket->hostTimestamp/1000000ULL) + "(sec) / "
-                                              + toStr(nextPacket->hostTimestamp) + "(millisecs)";
-                gMessage2 = "Sensor timestamp " + toStr(nextPacket->sensorTimestamp/1000000ULL) + "(sec) / "
-                                              + toStr(nextPacket->sensorTimestamp) + "(millisecs)";
-
-                dwSensorRadar_returnScan(nextPacket, gRadarSensor);
-                packetCount++;
+//                dwSensorRadar_returnScan(nextPacket, gRadarSensor);
+//                packetCount++;
             }
         }
-*/
 
-/*
+
+        std::cout << "passed nextPacket loop" << std::endl;
+
         float32_t *map;
         uint32_t maxVerts, stride;
 
-        for (size_t i = 0; i < DW_RADAR_RETURN_TYPE_COUNT; i++) {
-            for (size_t j = 0; j < DW_RADAR_RANGE_COUNT; j++) {
-                if (!gRadarProperties.supportedScanTypes[i][j])
-                    continue;
-
+        for (size_t i = 0; i < 1; i++) {
+            for (size_t j = 2; j < 3; j++) {
+                //if (!gRadarProperties.supportedScanTypes[i][j])
+                //    continue;
+                std::cout << "in the not a loop loop, point in array: " << accumulatedPoints[i][j] << std::endl;
                 // Map to the point cloud
                 dwRenderBuffer_map(&map, &maxVerts, &stride, gPointCloud[i][j]);
 
                 for (size_t k = 0; k < accumulatedPoints[i][j]; k++) {
-
+                    std::cout << " looping over accumulated points, index: " << k << std::endl;
                     if (static_cast<dwRadarReturnType>(i) == DW_RADAR_RETURN_TYPE_DETECTION) {
+                        std::cout << "in the detection" << std::endl;
                         dwRadarDetection* updatePoint =
                             reinterpret_cast<dwRadarDetection*>
                                 (gPointCloudBuffer[i][j] +
@@ -1108,10 +1231,12 @@ protected:
                         }
                     }
                 }
+                std::cout << "pre unmap" << std::endl;
                 dwRenderBuffer_unmap(accumulatedPoints[i][j], gPointCloud[i][j]);
+                std::cout << "post unmap" << std::endl;
             }
         }
-
+/*
         gMessage3 = "Packets                     " + toStr(packetCount);
         gMessage4 = "Application frequency for read Radar Scans (Hz)   " + toStr(updateFrequency());
         gMessage6 = "Step in the rect grid: " + toStr(WORLD_GRID_RES_IN_METERS) + "m / radial grid: " + toStr(WORLD_CIRCLE_DR_IN_METERS) + "m";
@@ -1137,6 +1262,8 @@ protected:
 //------------------------------------------------------------------------------
 int main(int argc, const char **argv)
 {
+    std::cout << "updated version check 7" << std::endl;
+
     std::string dynamicsParams;
     dynamicsParams = "can-driver=can.socket"
                      ",can-params=device=can0"
@@ -1157,7 +1284,7 @@ int main(int argc, const char **argv)
     // initialize and start a window application
     RadarReplay app(arguments);
 
-    app.initializeWindow("Camera replay", 1024, 800, arguments.enabled("offscreen"));
+    app.initializeWindow("Radarded replay", 1024, 800, arguments.enabled("offscreen"));
 
     return app.run();
 }
