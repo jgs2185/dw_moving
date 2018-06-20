@@ -147,6 +147,7 @@ private:
     // Sample specific. Vector for holding parsed CAN data
     // ---------------------------------------------------
     std::vector<dwRadarDetection> detections;
+    int targetCount = 0;
 
     // -------------------------------------------------------
     // Sample specific. Various flags for various display modes
@@ -934,7 +935,7 @@ protected:
         dwRenderer_setColor(DW_RENDERER_COLOR_RED, renderer);
 //        if (gRenderDetections) {
 //            for (size_t i = 0; i < DW_RADAR_RANGE_COUNT; i++) {
-//        std::cout << "pointcloud: " << gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2]
+//        std::cout << "pointcloud: " << gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2][0] << " " << gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2][1] << std::endl;
         dwRenderer_renderBuffer(
                     gPointCloud[DW_RADAR_RETURN_TYPE_DETECTION][2], renderer);
 //            }
@@ -988,8 +989,8 @@ protected:
 //    dwRadarDetection parseCANtarget(dwCANMessage msg)
     float32_t * parseCANtarget(dwCANMessage msg)
     {
-        //dwRadarDetection detection;
-        static float32_t decoded[13] = {0};
+        //static dwRadarDetection decoded;
+        static float32_t decoded[12] = {0};
 
         if(msg.size > 0){
 /*
@@ -998,20 +999,27 @@ protected:
             detection.radialVelocity = (int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
             detection.rcs = msg.data[1];
 */
-            decoded[7] = (float32_t)(int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0;
-            decoded[6] = (float32_t)(int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
-            decoded[8] = (float32_t)(int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
-            decoded[10] = (float32_t)msg.data[1];
-            decoded[0] = 1;
-            decoded[1] = 2;
+
+            float32_t angle = (float32_t)(int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
+
+
+            decoded[0] = ((float32_t)(int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0)*sin(angle*3.14/180.);//radius
+            decoded[1] = ((float32_t)(int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0)*cos(angle*3.14/180.);
             decoded[2] = 0;
-            decoded[3] = 0;
-            decoded[4] = 0;
-            decoded[5] = 0;
-            decoded[9] = 0;
-            decoded[11] = 0;
-            decoded[12] = 1;
+            decoded[3] = 0;//nothing
+            decoded[4] = 0;//nothing
+            decoded[5] = 0;//nothing
+            decoded[6] = (float32_t)(int16_t)( (msg.data[6] << 8) + msg.data[7]) / 100.0 * -1;
+            decoded[7] = (float32_t)(int16_t)( (msg.data[2] << 8) + msg.data[3]) / 100.0;
+            decoded[8] = (float32_t)(int16_t)( (msg.data[4] << 8) + msg.data[5]) / 100.0;
+            decoded[9] = 0;//nothing
+            decoded[10] = (float32_t)msg.data[1];
+            decoded[11] = 0;//nothing
+            //decoded[12] = 1;
+
         }
+
+        //std::cout << "decoded[0]: " << decoded[0] << std::endl;
 
         return decoded;
 
@@ -1020,10 +1028,12 @@ protected:
     float32_t * collectScan()
     {
         static float32_t dataArray[10] = {0};
+        //static dwRadarDetection dataArray[10] = {0};
         dwCANMessage msg;
 
-        int targetCount = 0;
+        targetCount = 0;
         float32_t* received;
+        //dwRadarDetection* received;
 
         while(!renderReady)
         {
@@ -1041,11 +1051,11 @@ protected:
                 renderReady = true;
             //    continue;
             //Everything else is either a target or a radar ACK
-            } else if( readyForTargets ){
+            } else if( (readyForTargets) && (msg.id < 0x500)){
                 std::cout << "target id: " << std::hex << (int)msg.id << std::endl << std::dec;
                 received = parseCANtarget(msg);
                 std::cout << "SNR: "      << received[10] << std::endl;
-                std::cout << "distance: " << received[7] << std::endl;
+                std::cout << "distance: " << received[7] << std::endl;//thought it should be 7
                 std::cout << "velocity: " << received[8] << std::endl;
                 std::cout << "angle: "    << received[6] << std::endl;
 
@@ -1062,11 +1072,12 @@ protected:
 
     void computeSpin()
     {
-        float32_t *packetArray;
+       // float32_t *packetArray;
 
-        packetArray = collectScan();
 
-        std::cout << "passed collectScan" << std::endl;
+        //packetArray = collectScan();
+
+//        std::cout << "passed collectScan" << std::endl;
 
 //        static uint32_t packetCount = 0;
         static std::chrono::system_clock::time_point t_start = std::chrono::high_resolution_clock::now();
@@ -1105,12 +1116,17 @@ protected:
 
         size_t accumulatedPoints[DW_RADAR_RETURN_TYPE_COUNT][DW_RADAR_RANGE_COUNT]{};
 
+
         // ToDo: this is just temporary logic until we return full scans (skadle)
-        for (size_t i = 0; i < 10; i++) {
+        for (int i = 0; i < targetCount; i++) {
 //            status = dwSensorRadar_readScan(&nextPacket,
 //                {}, 100000, gRadarSensor);
 
 //            float32_t * newArray = &packetArray[i];
+            dwRadarDetection newDetection;
+
+            newDetection.x = (float32_t)20.;//packetArray[i];
+            newDetection.y = (float32_t)10.;//packetArray[i*(sizeof(dwRadarDetection))+sizeof(float32_t)];
             const dwRadarScan nextPacket = 
             { 
                 1,
@@ -1118,11 +1134,12 @@ protected:
                 timey,
                 type,
                 1,
-                static_cast<void*>(&packetArray[i])
+                static_cast<void*>(&newDetection)
             };
 
-        std::cout << " made nextPacket " << std::endl;
-            std::cout << "looping through nextPacket, index: " << i << std::endl;
+//                static_cast<void*>(&packetArray[i])
+//        std::cout << " made nextPacket " << std::endl;
+//            std::cout << "looping through nextPacket, index: " << i << std::endl;
             if (status == DW_SUCCESS) {
 //                const dwRadarScanType &type = nextPacket->scanType;
                 //type.returnType = DW_RADAR_RETURN_TYPE_DETECTION;
@@ -1164,7 +1181,7 @@ protected:
         }
 
 
-        std::cout << "passed nextPacket loop" << std::endl;
+//        std::cout << "passed nextPacket loop" << std::endl;
 
         float32_t *map;
         uint32_t maxVerts, stride;
@@ -1173,14 +1190,14 @@ protected:
             for (size_t j = 2; j < 3; j++) {
                 //if (!gRadarProperties.supportedScanTypes[i][j])
                 //    continue;
-                std::cout << "in the not a loop loop, point in array: " << accumulatedPoints[i][j] << std::endl;
+//                std::cout << "in the not a loop loop, point in array: " << accumulatedPoints[i][j] << std::endl;
                 // Map to the point cloud
                 dwRenderBuffer_map(&map, &maxVerts, &stride, gPointCloud[i][j]);
 
                 for (size_t k = 0; k < accumulatedPoints[i][j]; k++) {
-                    std::cout << " looping over accumulated points, index: " << k << std::endl;
+//                    std::cout << " looping over accumulated points, index: " << k << std::endl;
                     if (static_cast<dwRadarReturnType>(i) == DW_RADAR_RETURN_TYPE_DETECTION) {
-                        std::cout << "in the detection" << std::endl;
+//                        std::cout << "in the detection" << std::endl;
                         dwRadarDetection* updatePoint =
                             reinterpret_cast<dwRadarDetection*>
                                 (gPointCloudBuffer[i][j] +
@@ -1231,9 +1248,9 @@ protected:
                         }
                     }
                 }
-                std::cout << "pre unmap" << std::endl;
+//                std::cout << "pre unmap" << std::endl;
                 dwRenderBuffer_unmap(accumulatedPoints[i][j], gPointCloud[i][j]);
-                std::cout << "post unmap" << std::endl;
+//                std::cout << "post unmap" << std::endl;
             }
         }
 /*
