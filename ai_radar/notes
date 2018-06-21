@@ -1,0 +1,153 @@
+current status:
+
+
+from /usr/local/driveworks/samples/build:
+do:
+ sudo make
+ sudo make install
+
+for updating samples
+
+-----------------------------------------------------
+
+building the shared library for the decoder
+sudo gcc -c -fPIC -I/usr/local/driveworks-0.6/include -I/usr/local/cuda-9.0/targets/aarch64-linux/include radarDecoder.cpp -o radarDecoder.o
+
+sudo gcc radarDecoder.o -shared -o libradardecoder.so
+
+
+
+
+-------------------------------------------------------
+
+Step2. Enable can0 on Tegra A.
+$sudo ip link set can0 type can bitrate 500000
+$sudo ip link set can0 up
+
+
+./sample_ai_radar --driver=can.socket --params=device=can0
+
+Next: /usr/local/driveworks-0.6/include/dw/sensors/plugins/radar/RadarDecoder.h 
+
+
+------------------------------
+look at dwSAL_createSensor(...) for what the params format, need to figure out how to specify CAN parameters in the ProgramArguments
+
+---------------------------------------
+using mixture of:
+/usr/local/driveworks-0.6/samples/src/sensors/imu/main.cpp
+/usr/local/driveworks-0.6/samples/src/sensors/radar/radar_replay/main.cpp
+/usr/local/driveworks-0.6/samples/src/dnn/sample_object_detector/main.cpp
+
+
+putting into ~/Desktop/dw_radar/main.cpp
+
+
+General stuff
+file:///usr/local/driveworks-0.6/doc/nvdwx_html/dwx_devguide_group.html
+
+sensors/record/README.md
+
+building:
+
+from /usr/local/driveworks/samples/build/
+> sudo cmake ..
+> sudo make
+> sudo make install
+
+
+
+typedef struct {
+    /// Radar properties.
+    dwRadarProperties properties;
+
+    /// Packet header size (in bytes).
+    size_t headerSize;
+
+    /// Packet max payload size (in bytes).
+    size_t maxPayloadSize;
+
+    /// Size of the vehicle state message to be sent to the radar.
+    size_t vehicleStateSize;
+
+    /// Size of the mount poisition message to be sent to the radar.
+    size_t mountSize;
+} _dwRadarDecoder_constants;
+
+
+
+typedef struct
+{
+    /// Indicates whether decoding is enabled
+    uint8_t isDecodingOn;
+
+    /// Number of supported scan types
+    uint32_t numScanTypes;
+
+    /// Enumerates the types of scans supported by the radar
+    uint32_t supportedScanTypes[DW_RADAR_RETURN_TYPE_COUNT][DW_RADAR_RANGE_COUNT];
+
+    /// # of packets per scan (Note: will be deprecated soon)
+    uint32_t packetsPerScan;
+
+    /// Max # of returns in any gien scan
+    uint32_t maxReturnsPerScan;
+
+    /**
+     * Number of scans (of a particular type) per second.
+     * In case scan rate differ between scans, this number is the maximum
+     * amongst all scan types
+     */
+    uint32_t scansPerSecond;
+
+    /// Number of input odometry packets per second
+    uint32_t   inputPacketsPerSecond;
+} dwRadarProperties;
+
+
+/// Defines the structure for a complete radar scan
+typedef struct
+{
+    /// Sensor-provided scan index
+    uint32_t scanIndex;
+
+    /// Sensor timestamp for this scan (us)
+    dwTime_t sensorTimestamp;
+
+    /// Host timestamp at reception of first packet belonging to this scan (us)
+    dwTime_t hostTimestamp;
+
+    /// Type of scan
+    dwRadarScanType scanType;
+
+    /// Number of radar returns in this scan
+    uint32_t numReturns;
+
+    /// Pointer to the array of returns (to be casted based on return type)
+    void *data;
+} dwRadarScan;
+
+/// Defines the type of scan (combination of return type & range)
+typedef struct
+{
+    /// Type of radar return
+    dwRadarReturnType returnType;
+
+    /// Scan range
+    dwRadarRange range;
+} dwRadarScanType;
+
+typedef struct
+{
+    /// Longitudinal velocity (m/s)
+    float32_t velocity;
+
+    /// Longitudinal acceleration (m/s^2)
+    float32_t acceleration;
+
+    /// Lateral acceleration (m/s^2)
+    float32_t lateralAcceleration;
+
+    /// Yaw rate (radians/s)
+    float32_t yawRate;
+} dwRadarVehicleState;
