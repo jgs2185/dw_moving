@@ -60,6 +60,7 @@ dwStatus _dwRadarDecoder_getConstants(_dwRadarDecoder_constants *constants){
     constants->properties.maxReturnsPerScan = 128;
     constants->properties.numScanTypes = 2;
     constants->properties.scansPerSecond = 20; //TODO find out what this really is
+    constants->properties.packetsPerScan = 62;
     for(int typecount = 0; typecount < DW_RADAR_RETURN_TYPE_COUNT; typecount ++){
         for(int rangecount = 0; rangecount < DW_RADAR_RANGE_COUNT; rangecount ++){
             constants->properties.supportedScanTypes[typecount][rangecount]=0;
@@ -163,7 +164,7 @@ dwStatus _dwRadarDecoder_validatePacket(const uint8_t *buffer,
 
 }
 
-/*
+
 dwBool _dwRadarDecoder_isScanComplete(dwRadarScanType scanType,
                                       const uint8_t **buffer,
                                       size_t *length,
@@ -201,4 +202,4 @@ dwStatus _dwRadarDecoder_encodeMountPosition(uint8_t *buffer,
 
 
 }
-*/
+
